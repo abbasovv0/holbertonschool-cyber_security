@@ -1,2 +1,2 @@
-#!/usr/bin/bash
-lsb_release -i | cut -f2
+#!/bin/bash
+. /etc/os-release && echo "$ID"
