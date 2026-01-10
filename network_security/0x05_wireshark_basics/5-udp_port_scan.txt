@@ -1,1 +1,1 @@
-udp.port == <port>
+icmp.type == 3
