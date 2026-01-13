@@ -1,2 +1,3 @@
 #!/bin/bash
-curl
+curl -X POST -H "Host: $1" -H " $2" --data "$3"
+
