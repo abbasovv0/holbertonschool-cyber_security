@@ -1,2 +1,3 @@
-h=${1#\{xor\}}
-for((i=0;i<${#h};i+=2));do printf "\\$(printf '%03o' $((0x${h:i:2}^90)))";done;echo
+#!/bin/bash
+input="${1#"{xor}"}"
+echo "$input" | base64 -d | perl -ne 'print $_ ^ "_" x length'
