@@ -1,0 +1,1 @@
+The OWASP Top 10 is a globally recognized awareness document that outlines the most critical security risks to web applications. It is maintained by the Open Web Application Security Project (OWASP), a non-profit foundation dedicated to software security
