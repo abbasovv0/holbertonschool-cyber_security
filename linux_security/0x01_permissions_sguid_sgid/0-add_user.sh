@@ -1,3 +1,3 @@
 #!/bin/bash
-echo -n useradd "$1"
-echo -n passwd "$2"
+useradd "$1"
+echo "$1:$2" | chpasswd
