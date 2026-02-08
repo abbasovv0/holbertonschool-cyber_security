@@ -1,2 +1,2 @@
 #!/bin/bash
-hashcat -m 500 -a 0 hash.txt /usr/share/wordlists/rockyou.txt "$1" > 7-password.txt
+hashcat -m 0 "$1" /usr/share/wordlists/rockyou.txt --force && hashcat -m 0 "$1" --show | cut -d: -f2 > 7-password.txt
