@@ -1,0 +1,1 @@
+Mandatory Access Control (MAC) is a highly secure, non-discretionary access model where a central authority (e.g., admin) enforces policy based on security labels—clearance for users and classifications for data.
