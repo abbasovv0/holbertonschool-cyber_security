@@ -1,0 +1,1 @@
+Network protocols are a set of standardized rules, procedures, and formats that enable computers and devices to communicate, exchange data, and ensure interoperability across a network, regardless of their underlying hardware or software.
