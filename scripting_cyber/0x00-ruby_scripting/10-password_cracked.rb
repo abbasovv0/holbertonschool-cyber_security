@@ -6,7 +6,7 @@ if ARGV.length != 2
   exit 1
 end
 
-target_hash = ARGV[0].downcase.strip
+hashed_password = ARGV[0].downcase.strip
 dictionary_file = ARGV[1]
 
 # Ensure the dictionary file exists before opening
@@ -28,7 +28,7 @@ begin
     current_hash = Digest::SHA256.hexdigest(word)
 
     # Compare the hashes
-    if current_hash == target_hash
+    if current_hash == hashed_password
       password_found = word
       break
     end
