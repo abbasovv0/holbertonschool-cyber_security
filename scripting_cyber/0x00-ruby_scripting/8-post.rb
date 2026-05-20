@@ -1,13 +1,21 @@
+cat > 8-post.rb << 'EOF'
 require 'net/http'
 require 'json'
 
-def get_request(url)
+def post_request(url, body_params = {})
   uri = URI(url)
-  response = Net::HTTP.get_response(uri)
+
+  http = Net::HTTP.new(uri.host, uri.port)
+  http.use_ssl = true
+
+  request = Net::HTTP::Post.new(uri.path, 'Content-Type' => 'application/json')
+  request.body = JSON.generate(body_params)
+
+  response = http.request(request)
 
   puts "Response status: #{response.code} #{response.message}"
   puts "Response body:"
-  
+
   parsed = JSON.parse(response.body)
   if parsed.empty?
     puts "{}"
@@ -15,3 +23,4 @@ def get_request(url)
     puts JSON.pretty_generate(parsed)
   end
 end
+EOF
