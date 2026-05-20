@@ -1,18 +1,20 @@
 require 'net/http'
-require 'json'
+require 'uri'
 
 def post_request(url, body_params = {})
-  uri = URI(url)
+  # Parse the string URL into a URI object
+  uri = URI.parse(url)
 
-  http = Net::HTTP.new(uri.host, uri.port)
-  http.use_ssl = true
+  begin
+    # Make the HTTP POST request using form-encoded parameters
+    response = Net::HTTP.post_form(uri, body_params)
 
-  request = Net::HTTP::Post.new(uri.path, 'Content-Type' => 'application/json')
-  request.body = JSON.generate(body_params)
+    # Print the status code and text description (e.g., "201 Created")
+    puts "Response status: #{response.code} #{response.message}"
+    puts "Response body:"
+    puts response.body
 
-  response = http.request(request)
-
-  puts "Response status: #{response.code} #{response.message}"
-  puts "Response body:"
-  puts JSON.pretty_generate(JSON.parse(response.body))
+  rescue StandardError => e
+    puts "An error occurred during the POST request: #{e.message}"
+  end
 end
