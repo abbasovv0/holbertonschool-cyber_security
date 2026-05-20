@@ -1,8 +1,8 @@
 require 'json'
 
-def merge_json_files(file1_path, file2_path)
-  file1 = File.read(file1_path)
-  file2 = File.read(file2_path)
+def merge_json_files(3-read_file, 4-write_file)
+  file1 = File.read(3-read_file)
+  file2 = File.read(3-write_file)
 
   data1 = JSON.parse(file1)
   data2 = JSON.parse(file2)
