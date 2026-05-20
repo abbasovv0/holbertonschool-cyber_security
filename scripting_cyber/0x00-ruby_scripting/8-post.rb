@@ -1,18 +1,17 @@
 require 'net/http'
 require 'json'
 
-def post_request(url, body_params = {})
+def get_request(url)
   uri = URI(url)
-
-  http = Net::HTTP.new(uri.host, uri.port)
-  http.use_ssl = true
-
-  request = Net::HTTP::Post.new(uri.path, 'Content-Type' => 'application/json')
-  request.body = JSON.generate(body_params)
-
-  response = http.request(request)
+  response = Net::HTTP.get_response(uri)
 
   puts "Response status: #{response.code} #{response.message}"
   puts "Response body:"
-  puts JSON.pretty_generate(JSON.parse(response.body))
+  
+  parsed = JSON.parse(response.body)
+  if parsed.empty?
+    puts "{}"
+  else
+    puts JSON.pretty_generate(parsed)
+  end
 end
