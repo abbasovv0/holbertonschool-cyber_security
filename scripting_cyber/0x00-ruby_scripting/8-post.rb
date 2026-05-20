@@ -1,15 +1,26 @@
 require 'net/http'
 require 'uri'
+require 'json'
 
 def post_request(url, body_params = {})
-  # Parse the string URL into a URI object
   uri = URI.parse(url)
 
   begin
-    # Make the HTTP POST request using form-encoded parameters
-    response = Net::HTTP.post_form(uri, body_params)
+    # Create the HTTP POST request object
+    request = Net::HTTP::Post.new(uri)
+    
+    # Set the content type to JSON
+    request['Content-Type'] = 'application/json'
+    
+    # Convert the ruby hash directly into a JSON string to preserve numbers/types
+    request.body = body_params.to_json
 
-    # Print the status code and text description (e.g., "201 Created")
+    # Execute the request inside an HTTP session
+    response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == 'https') do |http|
+      http.request(request)
+    end
+
+    # Print the status code and description
     puts "Response status: #{response.code} #{response.message}"
     puts "Response body:"
     puts response.body
